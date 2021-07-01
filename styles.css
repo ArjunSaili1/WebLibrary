@@ -1,0 +1,31 @@
+.card-grid{
+    display: grid;
+    grid-template-rows: 33vh;
+    grid-template-columns: 25vw 25vw 25vw;
+    column-gap: 2vw;
+}
+
+.book-info{
+    padding-left: 4%;
+    padding-top: 3%;
+}
+
+.book-title{
+    font-size: 30px
+}
+
+.book-author{
+    font-size: 16.5px;
+}
+
+.book-card{
+    min-width: 200px;
+    min-height: 105px;
+    width: 25vw;
+    height: 33vh;
+    border-style: solid;
+    border-color: rgb(63, 63, 63);
+    border-width: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5%;
+}
