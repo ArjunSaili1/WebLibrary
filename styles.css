@@ -3,6 +3,7 @@
     grid-template-rows: 33vh;
     grid-template-columns: 25vw 25vw 25vw;
     column-gap: 2vw;
+    row-gap: 5vh;
 }
 
 .book-info{
@@ -11,11 +12,27 @@
 }
 
 .book-title{
-    font-size: 30px
+    font-size: 3.2vw;
+    padding-bottom:1%;
+
 }
 
 .book-author{
-    font-size: 16.5px;
+    font-size: 1.5vw;
+    padding-bottom:1.5%;
+
+}
+
+.book-numOfPages{
+    font-size: 1.4vw;
+    padding-bottom:1%;
+
+}
+
+.book-read{
+    font-size: 1.3vw;
+    padding-bottom:1%;
+
 }
 
 .book-card{
