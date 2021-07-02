@@ -8,14 +8,26 @@
     <link href="styles.css" rel='stylesheet'>
 </head>
 <body>
-    <div class='card-grid'>
-        <!-- <div class='book-card'>
-            <div class='book-info'>
-                <div class='book-title'>Sample Book</div>
-                <div class='book-author'>Sample Author</div>
-                <div class='book-numOfPages'>123 Pages</div>
-                <div class='book-read'>Read</div>
-            </div> -->
+    <div class='behind-modal'>
+        <div class='card-grid'></div>
+        </div>
+        <button class='book-add'>Add a book</button>
+    </div>
+    <div class='modal-flex'>
+        <div class='add-book-modal'>
+            <label class='form' id='modal-title' for='Modal Title'>Add a new book</label><br>
+            <form id='add-book-form'>
+                <label class='form book-title-text' for='Book Title'>Book Title</label><br>
+                <input id='add-book-title' type='text' class='input-field form book-title-text'><br>
+                <label class='form book-author-text' for='Book Author'>Book Author</label><br>
+                <input id='add-book-author' type='text' class='input-field form book-author-text'><br>
+                <label class='form' for='Number of Pages'>Number of Pages</label><br>
+                <input id='add-book-pages' type='text' class='input-field form'><br>
+                <label class='form' for='Have Read'>Have you read this book?</label>
+                <input id='add-book-read' type='checkbox' class='input-field form'><br>
+                <div id='submit'>Add Book</div>
+                <div id='close'>&times</div>
+            </form>
         </div>
     </div>
     <script src='script.js'></script>
