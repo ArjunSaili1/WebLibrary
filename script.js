@@ -65,7 +65,6 @@ function createBookCard(currentBook, index) {
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
-    console.log(bookCardInfoArr[3].textContent);
     const deleteBook = document.createElement('button');
     deleteBook.textContent = '×';
     deleteBook.style.fontSize = '30px'
@@ -131,21 +130,6 @@ function deleteBookCard(e){
     myLibrary.splice(e.path[1].getAttribute('index'), 1);
     e.path[1].remove();
 }
-addBookToLibrary('The Hobbit', 'Lebron', '521', true);
-addBookToLibrary('The Hobbit', 'Lebron', '521', true);
-addBookToLibrary('The Hobbit', 'Lebron', '521', true);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'MIKE SMITH', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-addBookToLibrary('The Hobbit', 'Lebron', '521', false);
-
 addBookButton.addEventListener('click', displayAddBookModal.bind(null,addBookButton));
 form.addEventListener('submit',addBookCard.bind(null, form));
 closeModalButton.addEventListener('click', closeAddBookModal.bind(null,closeModalButton));
