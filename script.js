@@ -65,15 +65,34 @@ function createBookCard(currentBook, index) {
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
+    console.log(bookCardInfoArr[3].textContent);
     const deleteBook = document.createElement('button');
     deleteBook.textContent = '×';
     deleteBook.style.fontSize = '30px'
     deleteBook.style.position = 'absolute';
-    deleteBook.style.left = '87%';
-    deleteBook.style.top = '77%';
+    deleteBook.style.left = '86%';
+    deleteBook.style.top = '76%';
+    const changeReadButton = document.createElement('button');
+    changeReadButton.textContent = 'Change Read Status';
+    changeReadButton.style.position = 'absolute';
+    changeReadButton.style.top = '81%';
+    changeReadButton.style.left = '37%';
+    deleteBook.addEventListener('click', (e)=>{deleteBookCard(e)});
+    changeReadButton.addEventListener('click',(e)=>{changeReadStatus(e)});
+    newBookCard.appendChild(changeReadButton);
     newBookCard.appendChild(deleteBook);
     cardGrid.appendChild(newBookCard);
-    deleteBook.addEventListener('click', (e)=>{deleteBookCard(e)});
+}
+
+function changeReadStatus(e){
+    if(myLibrary[e.path[1].getAttribute('index')].read){
+        myLibrary[e.path[1].getAttribute('index')].read = false;
+        e.path[1].children[0].children[3].textContent = 'Not Read Yet';
+    }
+    else{
+        myLibrary[e.path[1].getAttribute('index')].read = true;
+        e.path[1].children[0].children[3].textContent = 'Read';
+    }
 }
 
 function addBookToLibrary(title, author, numOfPages, read) {
@@ -83,6 +102,7 @@ function addBookToLibrary(title, author, numOfPages, read) {
 }
 
 function displayAddBookModal(){
+    addBookModal.style.zIndex = '100';
     addBookModal.style.transition = 'opacity 0.5s';
     addBookModal.style.opacity = '100%';
     document.body.style.backgroundColor = 'rgb(211, 211, 211)';
@@ -91,6 +111,7 @@ function displayAddBookModal(){
 }
 
 function closeAddBookModal(){
+    addBookModal.style.zIndex = '-100';
     addBookModal.style.opacity = '0%';
     document.body.style.backgroundColor = 'white';
     behindModalBackground.style.filter = 'blur(0px)';
@@ -107,10 +128,24 @@ function addBookCard(){
 }
 
 function deleteBookCard(e){
-    myLibrary.splice(e.path[1].index, 1);
+    myLibrary.splice(e.path[1].getAttribute('index'), 1);
     e.path[1].remove();
 }
 addBookToLibrary('The Hobbit', 'Lebron', '521', true);
+addBookToLibrary('The Hobbit', 'Lebron', '521', true);
+addBookToLibrary('The Hobbit', 'Lebron', '521', true);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'MIKE SMITH', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+addBookToLibrary('The Hobbit', 'Lebron', '521', false);
+
 addBookButton.addEventListener('click', displayAddBookModal.bind(null,addBookButton));
 form.addEventListener('submit',addBookCard.bind(null, form));
 closeModalButton.addEventListener('click', closeAddBookModal.bind(null,closeModalButton));
