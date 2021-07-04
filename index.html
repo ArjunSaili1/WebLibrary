@@ -16,16 +16,16 @@
     <div class='modal-flex'>
         <div class='add-book-modal'>
             <label class='form' id='modal-title' for='Modal Title'>Add a new book</label><br>
-            <form id='add-book-form'>
+            <form id='add-book-form' onsubmit="return false">
                 <label class='form book-title-text' for='Book Title'>Book Title</label><br>
-                <input id='add-book-title' type='text' class='input-field form book-title-text'><br>
+                <input id='add-book-title' type='text' class='input-field form book-title-text' required><br>
                 <label class='form book-author-text' for='Book Author'>Book Author</label><br>
-                <input id='add-book-author' type='text' class='input-field form book-author-text'><br>
+                <input id='add-book-author' type='text' class='input-field form book-author-text' required><br>
                 <label class='form' for='Number of Pages'>Number of Pages</label><br>
-                <input id='add-book-pages' type='text' class='input-field form'><br>
+                <input id='add-book-pages' type='number' class='input-field form' required><br>
                 <label class='form' for='Have Read'>Have you read this book?</label>
                 <input id='add-book-read' type='checkbox' class='input-field form'><br>
-                <div id='submit'>Add Book</div>
+                <button id='submit' type='submit'>Add Book</button>
                 <div id='close'>&times</div>
             </form>
         </div>

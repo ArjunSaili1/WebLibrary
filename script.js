@@ -10,6 +10,7 @@ const pagesField =  document.querySelector('#add-book-pages');
 const readSelect = document.querySelector('#add-book-read');
 const submitAddBook = document.querySelector('#submit');
 const allFieldElements = document.querySelectorAll('.input-field')
+const form = document.querySelector('#add-book-form');
 function Book(title, author, numOfPages, read) {
     this.title = title;
     this.author = author;
@@ -52,9 +53,11 @@ function createBookCardInfo(currentBook){
     return bookCardInfoArr;
 }
 
-function createBookCard(currentBook) {
+function createBookCard(currentBook, index) {
     let newBookCard = document.createElement('div');
+    newBookCard.setAttribute('index', index);
     newBookCard.classList.add('book-card');
+    newBookCard.style.position = 'relative'
     let bookCardInfo = document.createElement('div');
     bookCardInfo.classList.add('book-info')
     newBookCard.appendChild(bookCardInfo);
@@ -62,15 +65,21 @@ function createBookCard(currentBook) {
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
+    const deleteBook = document.createElement('button');
+    deleteBook.textContent = '×';
+    deleteBook.style.fontSize = '30px'
+    deleteBook.style.position = 'absolute';
+    deleteBook.style.left = '87%';
+    deleteBook.style.top = '77%';
+    newBookCard.appendChild(deleteBook);
     cardGrid.appendChild(newBookCard);
+    deleteBook.addEventListener('click', (e)=>{deleteBookCard(e)});
 }
 
 function addBookToLibrary(title, author, numOfPages, read) {
-    console.log(read);
     let newBook = new Book(title, author, numOfPages, read);
     myLibrary.push(newBook);
-    createBookCard(newBook)
-    console.log(myLibrary);
+    createBookCard(newBook, myLibrary.length-1);
 }
 
 function displayAddBookModal(){
@@ -97,9 +106,13 @@ function addBookCard(){
     closeAddBookModal();
 }
 
-
+function deleteBookCard(e){
+    myLibrary.splice(e.path[1].index, 1);
+    e.path[1].remove();
+}
+addBookToLibrary('The Hobbit', 'Lebron', '521', true);
 addBookButton.addEventListener('click', displayAddBookModal.bind(null,addBookButton));
-submitAddBook.addEventListener('click',addBookCard.bind(null,submitAddBook));
+form.addEventListener('submit',addBookCard.bind(null, form));
 closeModalButton.addEventListener('click', closeAddBookModal.bind(null,closeModalButton));
 
 

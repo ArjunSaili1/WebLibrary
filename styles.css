@@ -114,3 +114,7 @@ button:hover{
 input[type='radio']:hover{
     cursor: pointer;
 }
+
+#invalid-pages{
+    position: absolute;
+}
