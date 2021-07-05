@@ -6,24 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Web Library</title>
     <link href="styles.css" rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class='behind-modal'>
-        <div class='card-grid'></div>
+        <div class='title-flex'>
+            <h1 id='title'>My Web Library</h1>
         </div>
-        <button class='book-add'>Add a book</button>
+        <div class='card-flex'>
+            <div class='card-grid'></div>
+        </div>
+        <div class='book-add'><img class='hvr-grow' src='images/add_circle_white_24dp.svg'></div>
     </div>
     <div class='modal-flex'>
         <div class='add-book-modal'>
             <label class='form' id='modal-title' for='Modal Title'>Add a new book</label><br>
             <form id='add-book-form' onsubmit="return false">
-                <label class='form book-title-text' for='Book Title'>Book Title</label><br>
-                <input id='add-book-title' type='text' class='input-field form book-title-text' required><br>
-                <label class='form book-author-text' for='Book Author'>Book Author</label><br>
+                <label id='book-title-group' class='form' for='Book Title'>Book Title</label><br>
+                <input id='add-book-title' type='text' class='input-field form' required><br>
+                <label id='ath-txt' class='form book-author-text' for='Book Author'>Book Author</label><br>
                 <input id='add-book-author' type='text' class='input-field form book-author-text'><br>
-                <label class='form' for='Number of Pages'>Number of Pages</label><br>
+                <label id='num-pages' class='form' for='Number of Pages'>Number of Pages</label><br>
                 <input id='add-book-pages' type='number' class='input-field form' required><br>
-                <label class='form' for='Have Read'>Have you read this book?</label>
+                <label id='have-read' class='form' for='Have Read'>Have you read this book?</label>
                 <input id='add-book-read' type='checkbox' class='input-field form'><br>
                 <button id='submit' type='submit'>Add Book</button>
                 <div id='close'>&times</div>

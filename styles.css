@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(109, 182, 173);
+}
 .card-grid{
     display: grid;
     grid-template-rows: 33vh;
@@ -6,56 +9,128 @@
     row-gap: 5vh;
 }
 
+@keyframes fadeIn{
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}
+
+@keyframes fadeOut{
+    from {opacity: 100%;}
+    to {opacity: 0%;}
+}
+
 .book-info{
     padding-left: 4%;
     padding-top: 3%;
 }
 
+#add-book-title{
+    position:absolute;
+    top: 28%;
+    width: 300px;
+    height: 20px;
+
+}
+
+#add-book-author{
+    position:absolute;
+    top: 45%;
+    width: 300px;
+    height: 20px;
+}
+
+#ath-txt{
+    position: absolute;
+    top: 37%;
+    font-size: 33px;
+}
+
+#book-title-group{
+    position: absolute;
+    top: 20%;
+    font-size: 33px;
+}
+
 .book-title{
-    font-size: 3.2vw;
-    padding-bottom:1%;
+    font-size: 4.5vw;
+    padding-bottom:0.5%;
 
 }
 
 .book-author{
-    font-size: 1.5vw;
-    padding-bottom:1.5%;
+    font-size: 2.4vw;
+    padding-bottom:2%;
 
+}
+
+#num-pages{
+    position:absolute;
+    top: 54%;
+    font-size: 33px;
+}
+
+#add-book-pages{
+    position:absolute;
+    top: 62%;
+    width: 300px;
+    height: 20px;
+}
+
+#have-read{
+    position:absolute;
+    top: 71%;
+    font-size: 33px;
+}
+
+#add-book-read{
+    position: absolute;
+    top: 79%;
+    height: 20px;
+    width: 20px;
+}
+
+#submit{
+    position: absolute;
+    top: 87%;
+    left: 69%;
+    height: 40px;
+    width: 100px;
 }
 
 .book-numOfPages{
-    font-size: 1.4vw;
-    padding-bottom:1%;
-
+    font-size: 1.7vw;
+    padding-bottom:3%;
 }
 
 .book-read{
-    font-size: 1.3vw;
+    font-size: 1.6vw;
     padding-bottom:1%;
 }
 
 .modal-flex{
+    z-index: -1;
     display: flex;
     position: absolute;
     bottom: 30vh;
     height: 33vh;
-    width: 100vw;
+    width: 99.37vw;
     justify-content: center;
     align-items: center;
 }
 
 .add-book-modal{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
     opacity: 0%;
     height: 75vh;
     padding-left: 2%;
     padding-top: 1%;
     border-style: solid;
-    width: 70vh;
+    border-radius: 5%;
+    width: 60vh;
     z-index: -100;
     position: fixed;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 
 .book-card{
     min-width: 200px;
@@ -67,18 +142,38 @@
     border-width: 3px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5%;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 .book-add{
     position: fixed;
-    left: 91vw;
-    top: 94vh;
+    transform: scale(3);
+    left: 93vw;
+    top: 87vh;
+    color: white;
 }
 
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.1);
+}
 
 #modal-title{
-    font-size: 4vw;
-    padding-bottom: 100px;
+    font-size: 5vw;
+    position: absolute;
+    top: 5%;
 }
 
 #add-book-form{
@@ -88,152 +183,44 @@
 
 .book-author-text{
     position:relative;
-    top: 5%
-}
-
-.behind-modal{
-    height: 100vh;
-    width: 100vw;
+    top: 5%;
 }
 
 #close{
     font-size: 100px;
     position: absolute;
-    left: 61vw;
-    bottom: 74vh;
+    left:86.5%;
+    top: -4%;
 }
 
 #close:hover{
     cursor: pointer;
 }
 
-button:hover{
-    cursor: pointer;
-}
-
-input[type='radio']:hover{
-    cursor: pointer;
-}
-
-#invalid-pages{
-    position: absolute;
-}.card-grid{
-    display: grid;
-    grid-template-rows: 33vh;
-    grid-template-columns: 25vw 25vw 25vw;
-    column-gap: 2vw;
-    row-gap: 5vh;
-}
-
-.book-info{
-    padding-left: 4%;
-    padding-top: 3%;
-}
-
-.book-title{
-    font-size: 3.2vw;
-    padding-bottom:1%;
-
-}
-
-.book-author{
-    font-size: 1.5vw;
-    padding-bottom:1.5%;
-
-}
-
-.book-numOfPages{
-    font-size: 1.4vw;
-    padding-bottom:1%;
-
-}
-
-.book-read{
-    font-size: 1.3vw;
-    padding-bottom:1%;
-}
-
-.modal-flex{
+.title-flex{
     display: flex;
-    position: absolute;
-    bottom: 30vh;
-    height: 33vh;
-    width: 100vw;
     justify-content: center;
-    align-items: center;
 }
 
-.add-book-modal{
-    opacity: 0%;
-    height: 75vh;
-    padding-left: 2%;
-    padding-top: 1%;
-    border-style: solid;
-    width: 70vh;
-    z-index: -100;
-    position: fixed;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+#title{
+    font-size: 40px;
+    font-family: 'Otomanopee One', sans-serif;
 }
 
-
-.book-card{
-    min-width: 200px;
-    min-height: 105px;
-    width: 25vw;
-    height: 33vh;
-    border-style: solid;
-    border-color: rgb(63, 63, 63);
-    border-width: 3px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5%;
+button{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 20px;
 }
 
-.book-add{
-    position: fixed;
-    left: 91vw;
-    top: 94vh;
-}
-
-
-#modal-title{
-    font-size: 4vw;
-    padding-bottom: 100px;
-}
-
-#add-book-form{
-    font-size: 2vw;
-    padding-top: 4%;
-}
-
-.book-author-text{
-    position:relative;
-    top: 5%
-}
-
-.behind-modal{
-    height: 100vh;
-    width: 100vw;
-}
-
-#close{
-    font-size: 100px;
-    position: absolute;
-    left: 61vw;
-    bottom: 74vh;
-}
-
-#close:hover{
+button:hover, input[type='checkbox']:hover, .hover-pointer{
     cursor: pointer;
 }
 
-button:hover{
-    cursor: pointer;
+
+
+.card-flex{
+    display:flex;
+    justify-content: center;
+    margin: 1%;
 }
 
-input[type='radio']:hover{
-    cursor: pointer;
-}
-
-#invalid-pages{
-    position: absolute;
-}

@@ -11,6 +11,7 @@ const readSelect = document.querySelector('#add-book-read');
 const submitAddBook = document.querySelector('#submit');
 const allFieldElements = document.querySelectorAll('.input-field')
 const form = document.querySelector('#add-book-form');
+const modalFlex = document.querySelector('.modal-flex');
 function Book(title, author, numOfPages, read) {
     this.title = title;
     this.author = author;
@@ -65,21 +66,26 @@ function createBookCard(currentBook, index) {
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
-    const deleteBook = document.createElement('button');
+    const deleteBook = document.createElement('div');
     deleteBook.textContent = '×';
-    deleteBook.style.fontSize = '30px'
+    deleteBook.style.fontSize = '80px';
     deleteBook.style.position = 'absolute';
     deleteBook.style.left = '86%';
-    deleteBook.style.top = '76%';
+    deleteBook.style.top = '66%';
+    deleteBook.classList.add('hover-pointer');
     const changeReadButton = document.createElement('button');
     changeReadButton.textContent = 'Change Read Status';
     changeReadButton.style.position = 'absolute';
-    changeReadButton.style.top = '81%';
-    changeReadButton.style.left = '37%';
+    changeReadButton.style.top = '76.5%';
+    changeReadButton.style.left = '38%';
+    changeReadButton.style.height = '35px';
     deleteBook.addEventListener('click', (e)=>{deleteBookCard(e)});
     changeReadButton.addEventListener('click',(e)=>{changeReadStatus(e)});
     newBookCard.appendChild(changeReadButton);
     newBookCard.appendChild(deleteBook);
+    newBookCard.style.animationName = 'fadeIn';
+    newBookCard.style.animationDuration = '0.8s';
+    newBookCard.style.backgroundColor = 'white';
     cardGrid.appendChild(newBookCard);
 }
 
@@ -101,19 +107,19 @@ function addBookToLibrary(title, author, numOfPages, read) {
 }
 
 function displayAddBookModal(){
+    modalFlex.style.zIndex = '100';
     addBookModal.style.zIndex = '100';
     addBookModal.style.transition = 'opacity 0.5s';
     addBookModal.style.opacity = '100%';
-    document.body.style.backgroundColor = 'rgb(211, 211, 211)';
     addBookModal.style.backgroundColor = 'white';
     behindModalBackground.style.filter = 'blur(5px)';
 }
 
 function closeAddBookModal(){
-    addBookModal.style.zIndex = '-100';
     addBookModal.style.opacity = '0%';
-    document.body.style.backgroundColor = 'white';
     behindModalBackground.style.filter = 'blur(0px)';
+    modalFlex.style.zIndex = '-1';
+    addBookModal.style.zIndex = '-1';
 }
 
 function addBookCard(){
@@ -127,9 +133,17 @@ function addBookCard(){
 }
 
 function deleteBookCard(e){
+    e.path[1].style.animationName = 'fadeOut';
+    e.path[1].style.animationDuration = '1s';
     myLibrary.splice(e.path[1].getAttribute('index'), 1);
     e.path[1].remove();
 }
+addBookToLibrary('Book1','Author1','111', true);
+addBookToLibrary('Book2','Author2','222', true);
+addBookToLibrary('Book3','Author3','333', true);
+addBookToLibrary('Book4','Author4','444', true);
+addBookToLibrary('Book5','Author15','555', true);
+
 addBookButton.addEventListener('click', displayAddBookModal.bind(null,addBookButton));
 form.addEventListener('submit',addBookCard.bind(null, form));
 closeModalButton.addEventListener('click', closeAddBookModal.bind(null,closeModalButton));
