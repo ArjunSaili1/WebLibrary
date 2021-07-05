@@ -91,14 +91,21 @@ function createBookCard(currentBook, index) {
         deleteBookAlert.style.animationName = 'fadeIn';
         deleteBookAlert.style.animationDuration = '1s';
         deleteBookAlert.style.opacity = '100%';
-        deleteConfirm.addEventListener('click', ()=>{deleteBookCard(e)});
-        cancelConfirm.addEventListener('click', ()=>{
+        const confirmDeleteClickHandler = () =>{
+            deleteBookCard(e);
+            deleteConfirm.removeEventListener("click", confirmDeleteClickHandler);
+          }
+        const confirmCancelClickHandler = () =>{
             deleteBookFlex.style.zIndex = '-1';
             deleteBookAlert.style.animationName = 'fadeOut';
             deleteBookAlert.style.animationDuration = '1s';
             deleteBookAlert.style.opacity = '0%';
             deleteBookAlert.style.display = 'none';
-        })
+            cancelConfirm.removeEventListener("click", confirmCancelClickHandler);
+            deleteConfirm.removeEventListener("click", confirmDeleteClickHandler);
+        }
+        deleteConfirm.addEventListener("click", confirmDeleteClickHandler);
+        cancelConfirm.addEventListener('click', confirmCancelClickHandler);
     });
     changeReadButton.addEventListener('click',(e)=>{changeReadStatus(e)});
     newBookCard.appendChild(changeReadButton);
@@ -155,15 +162,14 @@ function addBookCard(){
 
 function deleteBookCard(e){
     deleteBookFlex.style.zIndex = '-1';
-    deleteBookAlert.style.display = 'none';
     deleteBookAlert.style.animationName = 'fadeOut';
-    deleteBookAlert.style.animationDuration = '1s';
+    deleteBookAlert.style.animationDuration = '0.8s';
     deleteBookAlert.style.opacity = '0%';
-    console.log(e.path[1]);
+    setTimeout(function(){deleteBookAlert.style.display = 'none'}, 800);
     e.path[1].style.animationName = 'fadeOut';
-    e.path[1].style.animationDuration = '1s';
+    e.path[1].style.animationDuration = '0.8s';
     myLibrary.splice(e.path[1].getAttribute('index'), 1);
-    e.path[1].remove();
+    setTimeout(()=>{e.path[1].remove()},800);
     checkIfEmpty();
 }
 
