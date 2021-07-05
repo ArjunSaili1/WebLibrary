@@ -167,7 +167,7 @@ body{
 .hvr-grow:hover,
 .hvr-grow:focus,
 .hvr-grow:active {
-    transform: scale(1.1);
+    transform: scale(1.3);
 }
 
 #modal-title{
@@ -216,6 +216,18 @@ button:hover, input[type='checkbox']:hover, .hover-pointer{
     cursor: pointer;
 }
 
+.empty-text-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#empty-text{
+    display: none;
+    z-index: -10;
+    font-size: 30px;
+    font-family: 'Otomanopee One', sans-serif;
+}
 
 
 .card-flex{

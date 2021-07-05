@@ -12,6 +12,7 @@ const submitAddBook = document.querySelector('#submit');
 const allFieldElements = document.querySelectorAll('.input-field')
 const form = document.querySelector('#add-book-form');
 const modalFlex = document.querySelector('.modal-flex');
+const emptyText = document.querySelector('#empty-text');
 function Book(title, author, numOfPages, read) {
     this.title = title;
     this.author = author;
@@ -55,6 +56,7 @@ function createBookCardInfo(currentBook){
 }
 
 function createBookCard(currentBook, index) {
+    checkIfEmpty();
     let newBookCard = document.createElement('div');
     newBookCard.setAttribute('index', index);
     newBookCard.classList.add('book-card');
@@ -137,13 +139,20 @@ function deleteBookCard(e){
     e.path[1].style.animationDuration = '1s';
     myLibrary.splice(e.path[1].getAttribute('index'), 1);
     e.path[1].remove();
+    checkIfEmpty();
 }
-addBookToLibrary('Book1','Author1','111', true);
-addBookToLibrary('Book2','Author2','222', true);
-addBookToLibrary('Book3','Author3','333', true);
-addBookToLibrary('Book4','Author4','444', true);
-addBookToLibrary('Book5','Author15','555', true);
 
+function checkIfEmpty(){
+    console.log(myLibrary);
+    if(myLibrary.length == 0){
+        emptyText.style.display = 'unset';
+    }
+    else{
+        emptyText.style.display = 'none';
+    }
+}
+
+checkIfEmpty();
 addBookButton.addEventListener('click', displayAddBookModal.bind(null,addBookButton));
 form.addEventListener('submit',addBookCard.bind(null, form));
 closeModalButton.addEventListener('click', closeAddBookModal.bind(null,closeModalButton));
