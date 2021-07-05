@@ -13,6 +13,10 @@ const allFieldElements = document.querySelectorAll('.input-field')
 const form = document.querySelector('#add-book-form');
 const modalFlex = document.querySelector('.modal-flex');
 const emptyText = document.querySelector('#empty-text');
+const deleteBookFlex = document.querySelector('.delete-book-flex');
+const deleteBookAlert = document.querySelector('#delete-book-alert');
+const deleteConfirm = document.querySelector('#delete-confirm');
+const cancelConfirm = document.querySelector('#cancel-confirm');
 function Book(title, author, numOfPages, read) {
     this.title = title;
     this.author = author;
@@ -81,7 +85,21 @@ function createBookCard(currentBook, index) {
     changeReadButton.style.top = '76.5%';
     changeReadButton.style.left = '38%';
     changeReadButton.style.height = '35px';
-    deleteBook.addEventListener('click', (e)=>{deleteBookCard(e)});
+    deleteBook.addEventListener('click', (e) => {
+        deleteBookFlex.style.zIndex = '100';
+        deleteBookAlert.style.display = 'unset';
+        deleteBookAlert.style.animationName = 'fadeIn';
+        deleteBookAlert.style.animationDuration = '1s';
+        deleteBookAlert.style.opacity = '100%';
+        deleteConfirm.addEventListener('click', ()=>{deleteBookCard(e)});
+        cancelConfirm.addEventListener('click', ()=>{
+            deleteBookFlex.style.zIndex = '-1';
+            deleteBookAlert.style.animationName = 'fadeOut';
+            deleteBookAlert.style.animationDuration = '1s';
+            deleteBookAlert.style.opacity = '0%';
+            deleteBookAlert.style.display = 'none';
+        })
+    });
     changeReadButton.addEventListener('click',(e)=>{changeReadStatus(e)});
     newBookCard.appendChild(changeReadButton);
     newBookCard.appendChild(deleteBook);
@@ -134,7 +152,14 @@ function addBookCard(){
     closeAddBookModal();
 }
 
+
 function deleteBookCard(e){
+    deleteBookFlex.style.zIndex = '-1';
+    deleteBookAlert.style.display = 'none';
+    deleteBookAlert.style.animationName = 'fadeOut';
+    deleteBookAlert.style.animationDuration = '1s';
+    deleteBookAlert.style.opacity = '0%';
+    console.log(e.path[1]);
     e.path[1].style.animationName = 'fadeOut';
     e.path[1].style.animationDuration = '1s';
     myLibrary.splice(e.path[1].getAttribute('index'), 1);
@@ -143,7 +168,6 @@ function deleteBookCard(e){
 }
 
 function checkIfEmpty(){
-    console.log(myLibrary);
     if(myLibrary.length == 0){
         emptyText.style.display = 'unset';
     }
