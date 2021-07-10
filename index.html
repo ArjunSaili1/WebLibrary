@@ -19,13 +19,13 @@
         <div class='title-flex'>
             <h1 id='title'>My Web Library</h1>
         </div>
+        <div class='empty-text-flex'>
+            <div id='empty-text'>Your Library is Empty! Click the + button to Add Books</div>
+        </div>
         <div class='card-flex'>
             <div class='card-grid'></div>
         </div>
         <div class='book-add'><img class='hvr-grow' src='images/add_circle_white_24dp.svg'></div>
-        <div class='empty-text-flex'>
-            <div id='empty-text'>Your Library is Empty! Click the + button to Add Books</div>
-        </div>
         <div class='delete-book-flex'>
             <div id='delete-book-alert'>
                 <div id='delete-text'>Are you sure you want to delete this book?<br>(This Cannot be Undone!)</div>
@@ -44,8 +44,10 @@
                 <input id='add-book-author' type='text' class='input-field form book-author-text'><br>
                 <label id='num-pages' class='form' for='Number of Pages'>Number of Pages</label><br>
                 <input id='add-book-pages' type='number' class='input-field form' required><br>
+                <label id='book-image-lb' class='form'>Link to image of book (optional)</label><br>
+                <input id='book-image-in' type='text' class='form input-field'>
                 <label id='have-read' class='form' for='Have Read'>Have you read this book?</label>
-                <input id='add-book-read' type='checkbox' class='input-field form'><br>
+                <input id='add-book-read' type='checkbox' class='form'><br>
                 <button id='submit' type='submit'>Add Book</button>
                 <div id='close'>&times</div>
             </form>

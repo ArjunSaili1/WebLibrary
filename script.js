@@ -9,7 +9,6 @@ const authorField = document.querySelector('#add-book-author');
 const pagesField =  document.querySelector('#add-book-pages');
 const readSelect = document.querySelector('#add-book-read');
 const submitAddBook = document.querySelector('#submit');
-const allFieldElements = document.querySelectorAll('.input-field')
 const form = document.querySelector('#add-book-form');
 const modalFlex = document.querySelector('.modal-flex');
 const emptyText = document.querySelector('#empty-text');
@@ -17,11 +16,14 @@ const deleteBookFlex = document.querySelector('.delete-book-flex');
 const deleteBookAlert = document.querySelector('#delete-book-alert');
 const deleteConfirm = document.querySelector('#delete-confirm');
 const cancelConfirm = document.querySelector('#cancel-confirm');
-function Book(title, author, numOfPages, read) {
+const imgField = document.querySelector('#book-image-in');
+const bookCardImage = document.createElement('img');
+function Book(title, author, numOfPages, read, img) {
     this.title = title;
     this.author = author;
     this.numOfPages = numOfPages;
     this.read = read;
+    this.img = img;
 }
 
 Book.prototype.info = function () {
@@ -46,9 +48,21 @@ function createBookCardInfo(currentBook){
                     newBookInfo.textContent = 'Not Read Yet';
                 }
             }
+            else if(key == 'img'){
+                if(currentBook[key]==''){
+                    bookCardImage.src = 'images/template.png';
+                }
+                else{
+                    bookCardImage.src = currentBook[key];
+                }
+            }
             else if (key == 'numOfPages'){
-                newBookInfo.textContent = currentBook[key] + ' pages';
-
+                if(currentBook[key] == '1'){
+                    newBookInfo.textContent = currentBook[key] + ' page';
+                }
+                else{
+                    newBookInfo.textContent = currentBook[key] + ' pages';
+                }
             }
             else{
                 newBookInfo.textContent = currentBook[key];
@@ -64,27 +78,26 @@ function createBookCard(currentBook, index) {
     let newBookCard = document.createElement('div');
     newBookCard.setAttribute('index', index);
     newBookCard.classList.add('book-card');
-    newBookCard.style.position = 'relative'
+    newBookCard.style.position = 'relative';
     let bookCardInfo = document.createElement('div');
-    bookCardInfo.classList.add('book-info')
-    newBookCard.appendChild(bookCardInfo);
+    bookCardInfo.classList.add('book-info');
+    let bookCardFlex = document.createElement('div');
+    bookCardFlex.style.display = 'flex';
+    newBookCard.appendChild(bookCardFlex);
+    bookCardImage.classList.add('book-image');
+    bookCardFlex.appendChild(bookCardImage);
+    bookCardFlex.appendChild(bookCardInfo);
     let bookCardInfoArr = createBookCardInfo(currentBook);
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
     const deleteBook = document.createElement('div');
     deleteBook.textContent = '×';
-    deleteBook.style.fontSize = '80px';
-    deleteBook.style.position = 'absolute';
-    deleteBook.style.left = '86%';
-    deleteBook.style.top = '66%';
+    deleteBook.style.fontSize = '50px';
+    deleteBook.style.height = '100%';
     deleteBook.classList.add('hover-pointer');
     const changeReadButton = document.createElement('button');
     changeReadButton.textContent = 'Change Read Status';
-    changeReadButton.style.position = 'absolute';
-    changeReadButton.style.top = '76.5%';
-    changeReadButton.style.left = '38%';
-    changeReadButton.style.height = '35px';
     deleteBook.addEventListener('click', (e) => {
         deleteBookFlex.style.zIndex = '100';
         deleteBookAlert.style.display = 'unset';
@@ -98,9 +111,9 @@ function createBookCard(currentBook, index) {
         const confirmCancelClickHandler = () =>{
             deleteBookFlex.style.zIndex = '-1';
             deleteBookAlert.style.animationName = 'fadeOut';
-            deleteBookAlert.style.animationDuration = '1s';
+            deleteBookAlert.style.animationDuration = '0.8s';
             deleteBookAlert.style.opacity = '0%';
-            deleteBookAlert.style.display = 'none';
+            setTimeout(()=>{deleteBookAlert.style.display = 'none'},810);
             cancelConfirm.removeEventListener("click", confirmCancelClickHandler);
             deleteConfirm.removeEventListener("click", confirmDeleteClickHandler);
         }
@@ -108,8 +121,9 @@ function createBookCard(currentBook, index) {
         cancelConfirm.addEventListener('click', confirmCancelClickHandler);
     });
     changeReadButton.addEventListener('click',(e)=>{changeReadStatus(e)});
-    newBookCard.appendChild(changeReadButton);
-    newBookCard.appendChild(deleteBook);
+    bookCardFlex.appendChild(changeReadButton);
+    bookCardFlex.appendChild(deleteBook);
+    bookCardFlex.id = 'book-card-flex';
     newBookCard.style.animationName = 'fadeIn';
     newBookCard.style.animationDuration = '0.8s';
     newBookCard.style.backgroundColor = 'white';
@@ -117,18 +131,18 @@ function createBookCard(currentBook, index) {
 }
 
 function changeReadStatus(e){
-    if(myLibrary[e.path[1].getAttribute('index')].read){
-        myLibrary[e.path[1].getAttribute('index')].read = false;
-        e.path[1].children[0].children[3].textContent = 'Not Read Yet';
+    if(myLibrary[e.path[2].getAttribute('index')].read){
+        myLibrary[e.path[2].getAttribute('index')].read = false;
+        e.path[2].children[0].children[1].children[3].textContent = 'Not Read Yet';
     }
     else{
-        myLibrary[e.path[1].getAttribute('index')].read = true;
-        e.path[1].children[0].children[3].textContent = 'Read';
+        myLibrary[e.path[2].getAttribute('index')].read = true;
+        e.path[2].children[0].children[1].children[3].textContent = 'Read';
     }
 }
 
-function addBookToLibrary(title, author, numOfPages, read) {
-    let newBook = new Book(title, author, numOfPages, read);
+function addBookToLibrary(title, author, numOfPages, read, img) {
+    let newBook = new Book(title, author, numOfPages, read, img);
     myLibrary.push(newBook);
     createBookCard(newBook, myLibrary.length-1);
 }
@@ -151,10 +165,10 @@ function closeAddBookModal(){
 
 function addBookCard(){
     if (readSelect.checked){
-        addBookToLibrary(titleField.value, authorField.value, pagesField.value, true);
+        addBookToLibrary(titleField.value, authorField.value, pagesField.value, true, imgField.value);
     }
     else{
-        addBookToLibrary(titleField.value, authorField.value, pagesField.value, false);
+        addBookToLibrary(titleField.value, authorField.value, pagesField.value, false, imgField.value);
     }
     closeAddBookModal();
 }
@@ -166,16 +180,16 @@ function deleteBookCard(e){
     deleteBookAlert.style.animationDuration = '0.8s';
     deleteBookAlert.style.opacity = '0%';
     setTimeout(function(){deleteBookAlert.style.display = 'none'}, 800);
-    e.path[1].style.animationName = 'fadeOut';
-    e.path[1].style.animationDuration = '0.8s';
-    myLibrary.splice(e.path[1].getAttribute('index'), 1);
-    setTimeout(()=>{e.path[1].remove()},800);
+    e.path[2].style.animationName = 'fadeOut';
+    e.path[2].style.animationDuration = '0.8s';
+    myLibrary.splice(e.path[2].getAttribute('index'), 1);
+    setTimeout(()=>{e.path[2].remove()},800);
     checkIfEmpty();
 }
 
 function checkIfEmpty(){
     if(myLibrary.length == 0){
-        emptyText.style.display = 'unset';
+        setTimeout(()=>{emptyText.style.display = 'unset'}, 600);
     }
     else{
         emptyText.style.display = 'none';
