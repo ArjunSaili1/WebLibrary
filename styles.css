@@ -4,8 +4,7 @@ body{
 
 .book-image{
     width: 93%;
-    height: 70vh;
-    min-height: 168px;
+    justify-self: flex-start;
     border-radius: 5%;
     border-style: solid;
     margin-bottom: 2%;
@@ -105,12 +104,12 @@ body{
 
 .book-numOfPages{
     font-size: 20px;
-    padding-bottom: 15%;
+    padding-bottom: 4%;
 }
 
 .book-read{
     font-size: 18px;
-    padding-bottom: 10%;
+    padding-bottom: 3%;
 }
 
 .modal-flex{

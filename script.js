@@ -17,13 +17,12 @@ const deleteBookAlert = document.querySelector('#delete-book-alert');
 const deleteConfirm = document.querySelector('#delete-confirm');
 const cancelConfirm = document.querySelector('#cancel-confirm');
 const imgField = document.querySelector('#book-image-in');
-const bookCardImage = document.createElement('img');
 function Book(title, author, numOfPages, read, img) {
+    this.img = img;
     this.title = title;
     this.author = author;
     this.numOfPages = numOfPages;
     this.read = read;
-    this.img = img;
 }
 
 Book.prototype.info = function () {
@@ -38,6 +37,7 @@ function createBookCardInfo(currentBook){
     let bookCardInfoArr = [];
     for (key in currentBook){
         if (currentBook.hasOwnProperty(key)){
+            console.log(key);
             let newBookInfo = document.createElement('div');
             newBookInfo.classList.add('book-'+key);
             if(key == 'read'){
@@ -49,6 +49,10 @@ function createBookCardInfo(currentBook){
                 }
             }
             else if(key == 'img'){
+                const bookCardImage = document.createElement('img');
+                bookCardImage.classList.add('book-image');
+                newBookInfo.appendChild(bookCardImage);
+                console.log(newBookInfo.children);
                 if(currentBook[key]==''){
                     bookCardImage.src = 'images/template.png';
                 }
@@ -84,10 +88,9 @@ function createBookCard(currentBook, index) {
     let bookCardFlex = document.createElement('div');
     bookCardFlex.style.display = 'flex';
     newBookCard.appendChild(bookCardFlex);
-    bookCardImage.classList.add('book-image');
-    bookCardFlex.appendChild(bookCardImage);
     bookCardFlex.appendChild(bookCardInfo);
     let bookCardInfoArr = createBookCardInfo(currentBook);
+    console.log(bookCardInfoArr);
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
