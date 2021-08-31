@@ -18,20 +18,14 @@ const deleteConfirm = document.querySelector('#delete-confirm');
 const cancelConfirm = document.querySelector('#cancel-confirm');
 const imgField = document.querySelector('#book-image-in');
 
-function Book(title, author, numOfPages, read, img) {
-    this.img = img;
-    this.title = title;
-    this.author = author;
-    this.numOfPages = numOfPages;
-    this.read = read;
-}
-
-Book.prototype.info = function () {
-    let retStr = title + " by " + author + ', ' + numOfPages + " pages" + ', ';
-    if (read) {
-        return retStr + "not read yet."
+class Book{
+    constructor(title, author, numOfPages, read, img){
+        this.img = img;
+        this.title = title;
+        this.author = author;
+        this.numOfPages = numOfPages;
+        this.read = read;
     }
-    return retStr + "read."
 }
 
 function createBookCardInfo(currentBook){
@@ -73,6 +67,7 @@ function createBookCardInfo(currentBook){
             bookCardInfoArr.push(newBookInfo);
         }
     }
+    console.log(bookCardInfoArr);
     return bookCardInfoArr;
 }
 
