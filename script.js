@@ -17,6 +17,7 @@ const deleteBookAlert = document.querySelector('#delete-book-alert');
 const deleteConfirm = document.querySelector('#delete-confirm');
 const cancelConfirm = document.querySelector('#cancel-confirm');
 const imgField = document.querySelector('#book-image-in');
+
 function Book(title, author, numOfPages, read, img) {
     this.img = img;
     this.title = title;
@@ -37,7 +38,6 @@ function createBookCardInfo(currentBook){
     let bookCardInfoArr = [];
     for (key in currentBook){
         if (currentBook.hasOwnProperty(key)){
-            console.log(key);
             let newBookInfo = document.createElement('div');
             newBookInfo.classList.add('book-'+key);
             if(key == 'read'){
@@ -52,7 +52,6 @@ function createBookCardInfo(currentBook){
                 const bookCardImage = document.createElement('img');
                 bookCardImage.classList.add('book-image');
                 newBookInfo.appendChild(bookCardImage);
-                console.log(newBookInfo.children);
                 if(currentBook[key]==''){
                     bookCardImage.src = 'images/template.png';
                 }
@@ -90,7 +89,6 @@ function createBookCard(currentBook, index) {
     newBookCard.appendChild(bookCardFlex);
     bookCardFlex.appendChild(bookCardInfo);
     let bookCardInfoArr = createBookCardInfo(currentBook);
-    console.log(bookCardInfoArr);
     for(let i = 0; i<bookCardInfoArr.length; i++){
         bookCardInfo.appendChild(bookCardInfoArr[i]);
     }
@@ -136,11 +134,12 @@ function createBookCard(currentBook, index) {
 function changeReadStatus(e){
     if(myLibrary[e.path[2].getAttribute('index')].read){
         myLibrary[e.path[2].getAttribute('index')].read = false;
-        e.path[2].children[0].children[1].children[3].textContent = 'Not Read Yet';
+        console.log(e)
+        e.path[2].children[0].children[0].children[4].textContent = 'Not Read Yet';
     }
     else{
         myLibrary[e.path[2].getAttribute('index')].read = true;
-        e.path[2].children[0].children[1].children[3].textContent = 'Read';
+        e.path[2].children[0].children[0].children[4].textContent = 'Read';
     }
 }
 
